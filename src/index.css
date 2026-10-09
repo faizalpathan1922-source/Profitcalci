@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+
+  input[type="text"]:focus-visible,
+  input[type="number"]:focus-visible,
+  input[type="email"]:focus-visible,
+  input[type="tel"]:focus-visible,
+  input[type="date"]:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  }
+}
+
+/* Comprehensive Dark Mode Layer for All Tools & Components */
+.dark input[type="text"]:not(.invoice-paper *),
+.dark input[type="number"]:not(.invoice-paper *),
+.dark select:not(.invoice-paper *),
+.dark textarea:not(.invoice-paper *) {
+  background-color: #1e293b;
+  color: #f8fafc;
+  border-color: #334155;
+}
+
+.dark input[type="text"]::placeholder,
+.dark input[type="number"]::placeholder,
+.dark textarea::placeholder {
+  color: #64748b;
+}
+
+.dark .bg-white:not(.invoice-paper):not(.invoice-paper *):not(.theme-exempt) {
+  background-color: #0f172a;
+}
+
+.dark .bg-slate-50:not(.invoice-paper):not(.invoice-paper *):not(.theme-exempt) {
+  background-color: #020617;
+}
+
+.dark .bg-slate-100:not(.invoice-paper):not(.invoice-paper *):not(.theme-exempt) {
+  background-color: #1e293b;
+}
+
+.dark .border-slate-200:not(.invoice-paper):not(.invoice-paper *) {
+  border-color: #1e293b;
+}
+
+.dark .border-slate-300:not(.invoice-paper):not(.invoice-paper *) {
+  border-color: #334155;
+}
+
+.dark .border-slate-100:not(.invoice-paper):not(.invoice-paper *) {
+  border-color: #1e293b;
+}
+
+.dark .text-slate-900:not(.invoice-paper):not(.invoice-paper *) {
+  color: #f8fafc;
+}
+
+.dark .text-slate-800:not(.invoice-paper):not(.invoice-paper *) {
+  color: #f1f5f9;
+}
+
+.dark .text-slate-700:not(.invoice-paper):not(.invoice-paper *) {
+  color: #e2e8f0;
+}
+
+.dark .text-slate-600:not(.invoice-paper):not(.invoice-paper *) {
+  color: #cbd5e1;
+}
+
+.dark .text-slate-500:not(.invoice-paper):not(.invoice-paper *) {
+  color: #94a3b8;
+}
+
+.dark .hover\:bg-slate-50:hover:not(.invoice-paper):not(.invoice-paper *) {
+  background-color: #1e293b;
+}
+
+.dark .hover\:bg-slate-100:hover:not(.invoice-paper):not(.invoice-paper *) {
+  background-color: #334155;
+}
+
+.dark .hover\:bg-slate-200:hover:not(.invoice-paper):not(.invoice-paper *) {
+  background-color: #334155;
+}
+
+/* Horizontal tab scroll utilities without visible scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* =========================================================================
+   Part 2: Tactile Button Feedback, Page Transitions & Micro-Animations
+   ========================================================================= */
+
+/* Global Tactile Press & Click Feedback for All Interactive Elements */
+button:not(:disabled),
+[role="button"]:not(:disabled),
+.tactile-btn {
+  cursor: pointer;
+  transition: transform 150ms ease-out, box-shadow 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out, color 150ms ease-out;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:not(:disabled):hover,
+[role="button"]:not(:disabled):hover,
+.tactile-btn:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+}
+
+button:not(:disabled):active,
+[role="button"]:not(:disabled):active,
+.tactile-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.35);
+}
+
+/* Smooth Page & Route Entry Animation (Opacity: 0 -> 1, TranslateY: 12px -> 0px in ~220ms) */
+@keyframes pageFadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-page-enter {
+  animation: pageFadeSlideIn 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+/* Category Filter Tab & Tool Cards Smooth Glide In */
+@keyframes cardFadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-card-enter {
+  animation: cardFadeSlideIn 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+/* Calculation Result Container Pop Effect */
+@keyframes resultContainerPop {
+  0% {
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+  60% {
+    transform: scale(1.015);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-result-pop {
+  animation: resultContainerPop 220ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  will-change: transform, opacity;
+}
+
+/* Subtle Pulse Highlight on Final Calculation Numbers */
+@keyframes netNumberPulse {
+  0% {
+    text-shadow: 0 0 0 rgba(16, 185, 129, 0);
+    transform: scale(1);
+  }
+  40% {
+    text-shadow: 0 0 14px rgba(16, 185, 129, 0.5);
+    transform: scale(1.04);
+  }
+  100% {
+    text-shadow: 0 0 0 rgba(16, 185, 129, 0);
+    transform: scale(1);
+  }
+}
+
+.animate-number-pulse {
+  animation: netNumberPulse 240ms ease-out forwards;
+  will-change: transform;
+}
+
+@media print {
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .no-print, header, footer, nav, [data-ad-slot] {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  /* Force white background and readable dark typography for all containers when printing */
+  .dark html, .dark body, .dark #root, .dark main, .dark div {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border-color: #e2e8f0 !important;
+  }
+
+  .invoice-paper {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}

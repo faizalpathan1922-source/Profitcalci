@@ -1,0 +1,70 @@
+{
+  "id": "/",
+  "name": "ProfitCalci - Free Business Calculators & Tools for Indian Sellers",
+  "short_name": "ProfitCalci",
+  "description": "ProfitCalci is a free business calculator and tools platform designed for Indian sellers, entrepreneurs, retailers and small businesses.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#059669",
+  "background_color": "#047857",
+  "lang": "en-IN",
+  "categories": ["business", "finance", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "GST Calculator",
+      "short_name": "GST Calc",
+      "description": "Calculate intra-state CGST/SGST or inter-state IGST with slabs",
+      "url": "/tool/gst-calculator",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Profit Calculator",
+      "short_name": "Profit",
+      "description": "Estimate net marketplace payouts and courier RTO margins",
+      "url": "/tool/profit-calculator",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "GST Invoice",
+      "short_name": "Invoice",
+      "description": "Draft professional GST tax invoices with A4 print and PDF export",
+      "url": "/tool/invoice-generator",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Selling Price Planner",
+      "short_name": "Pricing",
+      "description": "Calculate recommended selling price for target margin",
+      "url": "/tool/selling-price-calculator",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}

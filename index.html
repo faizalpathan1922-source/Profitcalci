@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProfitCalci - Free Business Calculators & Tools for Indian Sellers</title>
+    <meta name="description" content="ProfitCalci is a free business calculator and tools platform designed for Indian sellers, entrepreneurs, retailers and small businesses. Features GST calculator, profit calculator, selling price calculator, GST invoice generator, and WhatsApp ad copy." />
+    
+    <!-- PWA & Mobile Web App Meta -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#059669" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="ProfitCalci" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="alternate icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
+    <link rel="canonical" href="https://profitcalci.in/" />
+    
+    <meta property="og:title" content="ProfitCalci - Free Business Calculators & Tools for Indian Sellers" />
+    <meta property="og:description" content="ProfitCalci is a free business calculator and tools platform designed for Indian sellers, entrepreneurs, retailers and small businesses." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://profitcalci.in/" />
+    <meta property="og:image" content="https://profitcalci.in/logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ProfitCalci - Free Business Calculators & Tools for Indian Sellers" />
+    <meta name="twitter:description" content="ProfitCalci is a free business calculator and tools platform designed for Indian sellers, entrepreneurs, retailers and small businesses." />
+    <meta name="twitter:image" content="https://profitcalci.in/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Schema.org Structured Data for Google AdSense & Search Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://profitcalci.in/#website",
+          "url": "https://profitcalci.in/",
+          "name": "ProfitCalci",
+          "description": "Free Business Calculators and Tools for Indian Sellers and Small Businesses",
+          "inLanguage": "en-IN"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://profitcalci.in/#software",
+          "name": "ProfitCalci Business Toolkit",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://profitcalci.in/#organization",
+          "name": "ProfitCalci",
+          "url": "https://profitcalci.in/",
+          "description": "ProfitCalci is a free business calculator and tools platform designed for Indian sellers, entrepreneurs, retailers and small businesses."
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google AdSense Tag (Replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID) -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+    <!-- Prevent Flash of Unstyled Content (FOUC) for Dark Mode -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('profitcalci_theme');
+          var isDark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.style.colorScheme = 'dark';
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.style.colorScheme = 'light';
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-emerald-100 selection:text-emerald-900 transition-colors duration-200">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

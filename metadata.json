@@ -1,0 +1,6 @@
+{
+  "name": "ProfitCalci - Free Business Calculators & Tools for Indian Sellers",
+  "description": "ProfitCalci is a free business calculator and tools platform designed for Indian sellers, entrepreneurs, retailers and small businesses.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
