@@ -32,8 +32,8 @@ const CATEGORY_DEFAULT_SLABS: Record<string, { meesho: PlatformFeeSlab; amazon: 
 };
 
 export const MarketplaceComparison: React.FC = () => {
-  const [sellingPrice, setSellingPrice] = useState<number>(799);
-  const [productCost, setProductCost] = useState<number>(280);
+  const [sellingPrice, setSellingPrice] = useState<number>(0);
+  const [productCost, setProductCost] = useState<number>(0);
   const [category, setCategory] = useState<'apparel' | 'footwear' | 'electronics' | 'home'>('apparel');
   const [copied, setCopied] = useState<boolean>(false);
   const [showOverrides, setShowOverrides] = useState<boolean>(false);

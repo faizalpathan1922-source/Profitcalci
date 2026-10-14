@@ -78,11 +78,9 @@ Upgrade your lifestyle or surprise someone special with a gift that truly lasts.
 }
 
 export const ProductDescriptionGenerator: React.FC = () => {
-  const [productName, setProductName] = useState<string>('Jaipuri Hand-Block Printed Cotton Saree');
-  const [category, setCategory] = useState<string>('Ethnic Wear');
-  const [features, setFeatures] = useState<string>(
-    '100% pure mulmul cotton, 5.5 meters length with 0.8 meter blouse piece, natural organic vegetable dyes, skin friendly and breathable, festive or daily office wear'
-  );
+  const [productName, setProductName] = useState<string>('');
+  const [category, setCategory] = useState<string>('');
+  const [features, setFeatures] = useState<string>('');
   const [targetPlatform, setTargetPlatform] = useState<'amazon' | 'meesho' | 'shopify'>('amazon');
   const [copied, setCopied] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);

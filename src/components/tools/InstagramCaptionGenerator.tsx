@@ -5,9 +5,9 @@ import { AiApiNoticeBanner } from '../AiApiNoticeBanner';
 import { AdSenseBanner } from '../AdSenseBanner';
 
 export const InstagramCaptionGenerator: React.FC = () => {
-  const [productName, setProductName] = useState<string>('Handcrafted Kundan Choker Necklace Set');
+  const [productName, setProductName] = useState<string>('');
   const [niche, setNiche] = useState<string>('ethnic_jewellery');
-  const [offerDetails, setOfferDetails] = useState<string>('Flat 25% Off + Free Shipping across India');
+  const [offerDetails, setOfferDetails] = useState<string>('');
   const [captionTone, setCaptionTone] = useState<string>('aesthetic');
   const [includeHashtags, setIncludeHashtags] = useState<boolean>(true);
 

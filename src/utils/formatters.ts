@@ -1,24 +1,81 @@
-export type SupportedCurrency = 'INR' | 'USD';
+export type SupportedCurrency = 'INR' | 'USD' | 'EUR' | 'GBP' | 'AED' | 'CAD';
+
+export interface CurrencyInfo {
+  code: SupportedCurrency;
+  symbol: string;
+  name: string;
+  flag: string;
+  rateAgainstINR: number; // 1 unit in INR (e.g. 1 USD = 86.50 INR)
+  locale: string;
+}
+
+export const CURRENCIES: Record<SupportedCurrency, CurrencyInfo> = {
+  INR: { code: 'INR', symbol: '₹', name: 'Indian Rupee', flag: '🇮🇳', rateAgainstINR: 1, locale: 'en-IN' },
+  USD: { code: 'USD', symbol: '$', name: 'US Dollar', flag: '🇺🇸', rateAgainstINR: 86.50, locale: 'en-US' },
+  EUR: { code: 'EUR', symbol: '€', name: 'Euro', flag: '🇪🇺', rateAgainstINR: 92.50, locale: 'de-DE' },
+  GBP: { code: 'GBP', symbol: '£', name: 'British Pound', flag: '🇬🇧', rateAgainstINR: 110.00, locale: 'en-GB' },
+  AED: { code: 'AED', symbol: 'AED', name: 'UAE Dirham', flag: '🇦🇪', rateAgainstINR: 23.55, locale: 'en-AE' },
+  CAD: { code: 'CAD', symbol: 'CA$', name: 'Canadian Dollar', flag: '🇨🇦', rateAgainstINR: 62.50, locale: 'en-CA' },
+};
 
 export function getGlobalCurrency(): SupportedCurrency {
   if (typeof window !== 'undefined') {
-    const saved = localStorage.getItem('profitcalci_currency');
-    if (saved === 'USD' || saved === 'INR') {
+    const saved = localStorage.getItem('profitcalci_currency') as SupportedCurrency;
+    if (saved && CURRENCIES[saved]) {
       return saved;
     }
   }
   return 'INR';
 }
 
+export function isCurrencyConversionEnabled(): boolean {
+  if (typeof window !== 'undefined') {
+    const saved = localStorage.getItem('profitcalci_fx_convert');
+    if (saved !== null) {
+      return saved === 'true';
+    }
+  }
+  return true;
+}
+
+export function setCurrencyConversionEnabled(enabled: boolean): void {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('profitcalci_fx_convert', String(enabled));
+    window.dispatchEvent(
+      new CustomEvent('profitcalci_currency_change', {
+        detail: { currency: getGlobalCurrency(), convert: enabled },
+      })
+    );
+  }
+}
+
 export function setGlobalCurrency(c: SupportedCurrency): void {
   if (typeof window !== 'undefined') {
     localStorage.setItem('profitcalci_currency', c);
-    window.dispatchEvent(new CustomEvent('profitcalci_currency_change', { detail: c }));
+    window.dispatchEvent(
+      new CustomEvent('profitcalci_currency_change', {
+        detail: { currency: c, convert: isCurrencyConversionEnabled() },
+      })
+    );
   }
 }
 
 export function getCurrencySymbol(currency: SupportedCurrency = getGlobalCurrency()): string {
-  return currency === 'USD' ? '$' : '₹';
+  return CURRENCIES[currency]?.symbol || '₹';
+}
+
+export function convertFromINR(val: number, targetCurrency: SupportedCurrency = getGlobalCurrency()): number {
+  if (isNaN(val) || val === null || val === undefined) return 0;
+  if (targetCurrency === 'INR') return val;
+  const rate = CURRENCIES[targetCurrency]?.rateAgainstINR || 1;
+  return val / rate;
+}
+
+export function convertToINR(val: number, sourceCurrency: SupportedCurrency = getGlobalCurrency()): number {
+  if (isNaN(val) || val === null || val === undefined) return 0;
+  if (sourceCurrency === 'INR') return val;
+  const rate = CURRENCIES[sourceCurrency]?.rateAgainstINR || 1;
+  return val * rate;
 }
 
 export function formatCurrency(
@@ -27,24 +84,35 @@ export function formatCurrency(
   decimals: number = 2
 ): string {
   if (isNaN(val) || val === null || val === undefined) {
-    return currency === 'USD' ? '$0.00' : '₹0.00';
+    const sym = getCurrencySymbol(currency);
+    return `${sym}0.00`;
   }
-  const isNegative = val < 0;
-  const absVal = Math.abs(val);
 
-  const locale = currency === 'USD' ? 'en-US' : 'en-IN';
-  const formatted = new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency: currency,
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals,
-  }).format(absVal);
+  const isConvert = isCurrencyConversionEnabled();
+  const effectiveVal = isConvert && currency !== 'INR' ? convertFromINR(val, currency) : val;
 
-  return isNegative ? `-${formatted}` : formatted;
+  const isNegative = effectiveVal < 0;
+  const absVal = Math.abs(effectiveVal);
+
+  const currInfo = CURRENCIES[currency] || CURRENCIES.INR;
+  try {
+    const formatted = new Intl.NumberFormat(currInfo.locale, {
+      style: 'currency',
+      currency: currency,
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    }).format(absVal);
+
+    return isNegative ? `-${formatted}` : formatted;
+  } catch {
+    const sym = currInfo.symbol;
+    const num = absVal.toFixed(decimals);
+    return isNegative ? `-${sym}${num}` : `${sym}${num}`;
+  }
 }
 
 /**
- * Formats a number to active currency (INR ₹ or USD $) representation
+ * Formats a number to active currency representation
  */
 export function formatINR(val: number, decimals: number = 2): string {
   return formatCurrency(val, getGlobalCurrency(), decimals);

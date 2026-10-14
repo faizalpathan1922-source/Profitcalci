@@ -16,6 +16,7 @@ import { TOOLS_LIST } from '../data/toolsData';
 import { FAQS_DATA } from '../data/faqData';
 import { ToolItem } from '../types';
 import { getRecentlyUsedToolSlugs, clearRecentlyUsedTools } from '../utils/recentTools';
+import { useAdminConfig } from '../context/AdminConfigContext';
 
 interface HomePageProps {
   onSelectTool: (slug: string) => void;
@@ -46,6 +47,7 @@ const CATEGORY_MAP: Record<Exclude<FilterCategory, 'all'>, string[]> = {
 };
 
 export const HomePage: React.FC<HomePageProps> = ({ onSelectTool, onNavigate }) => {
+  const { activeTools, content } = useAdminConfig();
   const [activeCategory, setActiveCategory] = useState<FilterCategory>('all');
   const [recentSlugs, setRecentSlugs] = useState<string[]>(() => getRecentlyUsedToolSlugs());
 
@@ -64,10 +66,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onSelectTool, onNavigate }) 
 
   const recentTools = useMemo(() => {
     return recentSlugs
-      .map((slug) => TOOLS_LIST.find((t) => t.slug === slug))
+      .map((slug) => activeTools.find((t) => t.slug === slug))
       .filter((tool): tool is ToolItem => Boolean(tool))
       .slice(0, 3);
-  }, [recentSlugs]);
+  }, [recentSlugs, activeTools]);
 
   const handleClearRecent = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -77,15 +79,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onSelectTool, onNavigate }) 
 
   const filteredTools = useMemo(() => {
     if (activeCategory === 'all') {
-      return TOOLS_LIST;
+      return activeTools;
     }
     const targetSlugs = CATEGORY_MAP[activeCategory] || [];
-    return TOOLS_LIST.filter((tool) => targetSlugs.includes(tool.slug));
-  }, [activeCategory]);
+    return activeTools.filter((tool) => targetSlugs.includes(tool.slug));
+  }, [activeCategory, activeTools]);
 
   const getCategoryCount = (catId: FilterCategory) => {
-    if (catId === 'all') return TOOLS_LIST.length;
-    return (CATEGORY_MAP[catId] || []).length;
+    if (catId === 'all') return activeTools.length;
+    return activeTools.filter((tool) => (CATEGORY_MAP[catId] || []).includes(tool.slug)).length;
   };
 
   return (
@@ -94,18 +96,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onSelectTool, onNavigate }) 
       <section className="relative pt-4 sm:pt-10 pb-4 text-center max-w-4xl mx-auto px-4">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800 mb-6 shadow-xs animate-in fade-in">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>100% Free Business Tools • Built for Bharat Sellers</span>
+          <span>{content.homepage.heroBadge}</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
-          Simplify Everyday Business for{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 via-emerald-600 to-teal-500 dark:from-emerald-400 dark:via-emerald-300 dark:to-teal-300">
-            Indian Sellers
-          </span>
+          {content.homepage.heroHeading}
         </h1>
 
         <p className="mt-4 sm:mt-5 text-sm sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          Fast, accurate calculators and utilities for GST invoices, marketplace payouts, RTO returns, and WhatsApp sales copy.
+          {content.homepage.heroSubheading}
         </p>
 
         {/* Quick Launch Buttons */}

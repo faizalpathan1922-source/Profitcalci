@@ -3,8 +3,8 @@ import { Percent, ArrowRightLeft, Copy, Check, Info } from 'lucide-react';
 import { formatINR, parseSafeNumber } from '../../utils/formatters';
 
 export const MarginMarkupCalculator: React.FC = () => {
-  const [cost, setCost] = useState<number>(500);
-  const [markupPercent, setMarkupPercent] = useState<number>(40);
+  const [cost, setCost] = useState<number>(0);
+  const [markupPercent, setMarkupPercent] = useState<number>(0);
   const [copied, setCopied] = useState<boolean>(false);
 
   const safeCost = Math.max(0, parseSafeNumber(cost, 0));

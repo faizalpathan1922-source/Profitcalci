@@ -57,16 +57,16 @@ const PLATFORMS: PlatformPreset[] = [
 
 export const ProfitCalculator: React.FC = () => {
   const [selectedPlatform, setSelectedPlatform] = useState<'general' | 'meesho' | 'amazon' | 'flipkart' | 'shopify' | 'custom'>('general');
-  const [sellingPrice, setSellingPrice] = useState<string>('800');
-  const [costPrice, setCostPrice] = useState<string>('500');
-  const [referralPercent, setReferralPercent] = useState<string>('0');
-  const [closingFee, setClosingFee] = useState<string>('0');
-  const [shippingFee, setShippingFee] = useState<string>('50');
-  const [packagingFee, setPackagingFee] = useState<string>('20');
-  const [otherExpenses, setOtherExpenses] = useState<string>('30');
-  const [rtoPercent, setRtoPercent] = useState<string>('0'); // 0% for general sale
-  const [rtoLossPerUnit, setRtoLossPerUnit] = useState<string>('80');
-  const [adSpend, setAdSpend] = useState<string>('0');
+  const [sellingPrice, setSellingPrice] = useState<string>('');
+  const [costPrice, setCostPrice] = useState<string>('');
+  const [referralPercent, setReferralPercent] = useState<string>('');
+  const [closingFee, setClosingFee] = useState<string>('');
+  const [shippingFee, setShippingFee] = useState<string>('');
+  const [packagingFee, setPackagingFee] = useState<string>('');
+  const [otherExpenses, setOtherExpenses] = useState<string>('');
+  const [rtoPercent, setRtoPercent] = useState<string>('');
+  const [rtoLossPerUnit, setRtoLossPerUnit] = useState<string>('');
+  const [adSpend, setAdSpend] = useState<string>('');
   const [copied, setCopied] = useState<boolean>(false);
   const [downloaded, setDownloaded] = useState<boolean>(false);
 

@@ -16,27 +16,11 @@ export const BulkProfitCalculator: React.FC = () => {
   const [products, setProducts] = useState<BulkProductRow[]>([
     {
       id: '1',
-      name: 'Cotton Printed Kurtis',
-      quantity: 100,
-      costPrice: 250,
-      sellingPrice: 499,
-      unitOverhead: 40,
-    },
-    {
-      id: '2',
-      name: 'Wireless Bluetooth Earbuds',
-      quantity: 50,
-      costPrice: 400,
-      sellingPrice: 899,
-      unitOverhead: 60,
-    },
-    {
-      id: '3',
-      name: 'Stainless Steel Water Bottles',
-      quantity: 80,
-      costPrice: 150,
-      sellingPrice: 349,
-      unitOverhead: 35,
+      name: '',
+      quantity: 0,
+      costPrice: 0,
+      sellingPrice: 0,
+      unitOverhead: 0,
     },
   ]);
 
@@ -85,11 +69,11 @@ export const BulkProfitCalculator: React.FC = () => {
       ...products,
       {
         id: Date.now().toString(),
-        name: `Product #${products.length + 1}`,
-        quantity: 10,
-        costPrice: 200,
-        sellingPrice: 400,
-        unitOverhead: 30,
+        name: '',
+        quantity: 0,
+        costPrice: 0,
+        sellingPrice: 0,
+        unitOverhead: 0,
       },
     ]);
   };

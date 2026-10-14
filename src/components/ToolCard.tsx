@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Calculator, 
   TrendingUp, 
@@ -22,16 +22,20 @@ import {
   Heading,
   Share2,
   Store,
-  ShoppingBag
+  ShoppingBag,
+  Check
 } from 'lucide-react';
 import { ToolItem } from '../types';
+import { shareContent } from '../utils/shareTool';
 
 interface ToolCardProps {
   tool: ToolItem;
   onSelect: (slug: string) => void;
+  onShareNotice?: (message: string) => void;
 }
 
-export const ToolCard: React.FC<ToolCardProps> = ({ tool, onSelect }) => {
+export const ToolCard: React.FC<ToolCardProps> = ({ tool, onSelect, onShareNotice }) => {
+  const [copied, setCopied] = useState(false);
   const getIcon = () => {
     switch (tool.iconName) {
       case 'Calculator':
@@ -83,6 +87,26 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool, onSelect }) => {
     }
   };
 
+  const handleShare = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const url = `${window.location.origin}/tool/${tool.slug}`;
+    const result = await shareContent({
+      title: `${tool.name} - ProfitCalci`,
+      text: `Calculate ${tool.name} easily for your business with ProfitCalci: ${tool.description}`,
+      url,
+    });
+
+    if (result.shared) {
+      if (onShareNotice) onShareNotice(`Shared "${tool.name}" successfully!`);
+    } else if (result.copiedToClipboard) {
+      setCopied(true);
+      if (onShareNotice) {
+        onShareNotice(`"${tool.name}" link copied to clipboard!`);
+      }
+      setTimeout(() => setCopied(false), 2500);
+    }
+  };
+
   return (
     <div
       onClick={() => onSelect(tool.slug)}
@@ -93,11 +117,30 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool, onSelect }) => {
           <div className="w-12 h-12 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 flex items-center justify-center group-hover:scale-110 group-hover:bg-emerald-50 dark:group-hover:bg-emerald-950/60 transition-all">
             {getIcon()}
           </div>
-          {tool.badge && (
-            <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-800">
-              {tool.badge}
-            </span>
-          )}
+          <div className="flex items-center gap-1.5">
+            {tool.badge && (
+              <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-800">
+                {tool.badge}
+              </span>
+            )}
+            <button
+              type="button"
+              onClick={handleShare}
+              className={`p-1.5 rounded-xl border transition-all cursor-pointer ${
+                copied
+                  ? 'bg-emerald-50 border-emerald-300 text-emerald-700 dark:bg-emerald-950/70 dark:border-emerald-700 dark:text-emerald-300'
+                  : 'bg-slate-50/80 dark:bg-slate-800/80 border-slate-200/80 dark:border-slate-700 text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-700/80'
+              }`}
+              title="Share this tool with business contacts"
+              aria-label={`Share ${tool.name}`}
+            >
+              {copied ? (
+                <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              ) : (
+                <Share2 className="w-3.5 h-3.5" />
+              )}
+            </button>
+          </div>
         </div>
 
         <h3 className="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">

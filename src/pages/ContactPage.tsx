@@ -19,6 +19,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   const officialEmail = 'support@profitcalci.in';
+  const responseTimeText = 'We typically respond to seller queries within 24–48 business hours.';
+  const locationText = 'Based in Maharashtra, India.';
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(officialEmail);
@@ -140,7 +142,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     Response Time
                   </span>
                   <p className="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 mt-0.5 leading-relaxed">
-                    We typically respond to seller queries within 24–48 business hours.
+                    {responseTimeText}
                   </p>
                 </div>
               </div>
@@ -155,7 +157,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     Headquarters
                   </span>
                   <p className="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 mt-0.5">
-                    Based in Maharashtra, India.
+                    {locationText}
                   </p>
                   <span className="text-[11px] text-slate-500 dark:text-slate-400 block mt-0.5">
                     Independent Indian seller tools platform

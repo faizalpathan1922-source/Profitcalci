@@ -213,16 +213,14 @@ Thank you for supporting *${businessName}*!`;
 }
 
 export const WhatsAppAdGenerator: React.FC = () => {
-  const [businessName, setBusinessName] = useState<string>('Radhika Ethnic Studio');
-  const [productName, setProductName] = useState<string>('Pure Cotton Printed Anarkali Kurti Set with Dupatta');
-  const [regularPriceInput, setRegularPriceInput] = useState<string>('1499');
-  const [offerPriceInput, setOfferPriceInput] = useState<string>('699');
-  const [keyFeatures, setKeyFeatures] = useState<string>(
-    'Free Cash on Delivery, Sizes M to XXL, Fast 3-day express delivery, 100% Breathable Cotton'
-  );
+  const [businessName, setBusinessName] = useState<string>('');
+  const [productName, setProductName] = useState<string>('');
+  const [regularPriceInput, setRegularPriceInput] = useState<string>('');
+  const [offerPriceInput, setOfferPriceInput] = useState<string>('');
+  const [keyFeatures, setKeyFeatures] = useState<string>('');
   const [campaignType, setCampaignType] = useState<CampaignType>('festive');
   const [tone, setTone] = useState<ToneType>('hinglish');
-  const [whatsappNumber, setWhatsappNumber] = useState<string>('9876543210');
+  const [whatsappNumber, setWhatsappNumber] = useState<string>('');
 
   // Ad Copy State
   const [editedCopy, setEditedCopy] = useState<string>('');

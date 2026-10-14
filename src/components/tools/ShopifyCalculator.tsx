@@ -18,17 +18,17 @@ const SHOPIFY_PLANS: Record<string, ShopifyPlan> = {
 
 export const ShopifyCalculator: React.FC = () => {
   const [selectedPlan, setSelectedPlan] = useState<string>('basic');
-  const [sellingPrice, setSellingPrice] = useState<string>('1299');
-  const [costPrice, setCostPrice] = useState<string>('450');
-  const [adSpendPerOrder, setAdSpendPerOrder] = useState<string>('300'); // CAC
-  const [shippingFee, setShippingFee] = useState<string>('70');
-  const [packagingFee, setPackagingFee] = useState<string>('25');
-  const [pgFeePercent, setPgFeePercent] = useState<string>('2'); // Razorpay/Cashfree
-  const [codSharePercent, setCodSharePercent] = useState<string>('60'); // 60% COD, 40% Prepaid
-  const [codHandlingFee, setCodHandlingFee] = useState<string>('35'); // Courier charges extra for COD
-  const [rtoPercent, setRtoPercent] = useState<string>('15'); // 15% COD RTO
-  const [rtoLossPerUnit, setRtoLossPerUnit] = useState<string>('85');
-  const [otherOverheads, setOtherOverheads] = useState<string>('20');
+  const [sellingPrice, setSellingPrice] = useState<string>('');
+  const [costPrice, setCostPrice] = useState<string>('');
+  const [adSpendPerOrder, setAdSpendPerOrder] = useState<string>('');
+  const [shippingFee, setShippingFee] = useState<string>('');
+  const [packagingFee, setPackagingFee] = useState<string>('');
+  const [pgFeePercent, setPgFeePercent] = useState<string>('');
+  const [codSharePercent, setCodSharePercent] = useState<string>('');
+  const [codHandlingFee, setCodHandlingFee] = useState<string>('');
+  const [rtoPercent, setRtoPercent] = useState<string>('');
+  const [rtoLossPerUnit, setRtoLossPerUnit] = useState<string>('');
+  const [otherOverheads, setOtherOverheads] = useState<string>('');
 
   const [copied, setCopied] = useState<boolean>(false);
   const [downloaded, setDownloaded] = useState<boolean>(false);

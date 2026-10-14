@@ -17,6 +17,8 @@ import { TOOLS_LIST } from '../data/toolsData';
 import { PWAInstallButton } from './PWAInstallButton';
 import { Logo } from './Logo';
 import { ThemeToggle } from './ThemeToggle';
+import { CurrencyToggle } from './CurrencyToggle';
+import { useAdminConfig } from '../context/AdminConfigContext';
 
 interface HeaderProps {
   currentPath: string;
@@ -25,6 +27,7 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenSearch }) => {
+  const { activeTools } = useAdminConfig();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
 
@@ -87,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
                     Core Business Tools
                   </div>
                   <div className="space-y-0.5">
-                    {TOOLS_LIST.slice(0, 5).map((tool) => (
+                    {activeTools.slice(0, 5).map((tool) => (
                       <button
                         key={tool.id}
                         onClick={() => handleNav(`/tool/${tool.slug}`)}
@@ -114,7 +117,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
                       onClick={() => handleNav('/tools')}
                       className="w-full text-center py-2 text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-lg transition-colors cursor-pointer"
                     >
-                      View All 20+ Business Tools →
+                      View All {activeTools.length} Business Tools →
                     </button>
                   </div>
                 </div>
@@ -179,6 +182,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
 
           {/* Right Action Icons */}
           <div className="flex items-center gap-2">
+            {/* Currency Switcher */}
+            <CurrencyToggle />
+
             {/* Global Theme Toggle */}
             <ThemeToggle />
 
@@ -216,6 +222,14 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-3 pb-6 space-y-3 animate-in slide-in-from-top duration-150">
+          {/* Quick Currency Selector in drawer */}
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+            <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              Display Currency
+            </span>
+            <CurrencyToggle showLabel />
+          </div>
+
           {/* Quick theme toggle in drawer */}
           <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
             <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">

@@ -43,7 +43,15 @@
           "url": "https://profitcalci.in/",
           "name": "ProfitCalci",
           "description": "Free Business Calculators and Tools for Indian Sellers and Small Businesses",
-          "inLanguage": "en-IN"
+          "inLanguage": "en-IN",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://profitcalci.in/?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
         },
         {
           "@type": "SoftwareApplication",

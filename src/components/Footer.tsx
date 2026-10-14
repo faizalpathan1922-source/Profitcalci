@@ -164,6 +164,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Cookie Policy
                 </button>
               </li>
+              <li className="pt-2 border-t border-slate-900">
+                <button
+                  onClick={() => handleNav('/admin')}
+                  className="inline-flex items-center gap-1.5 text-slate-500 hover:text-emerald-400 transition-colors cursor-pointer text-[11px]"
+                >
+                  <span>Admin Portal</span>
+                </button>
+              </li>
             </ul>
           </div>
         </div>

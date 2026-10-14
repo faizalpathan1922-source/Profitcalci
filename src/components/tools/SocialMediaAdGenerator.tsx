@@ -5,11 +5,11 @@ import { AiApiNoticeBanner } from '../AiApiNoticeBanner';
 import { AdSenseBanner } from '../AdSenseBanner';
 
 export const SocialMediaAdGenerator: React.FC = () => {
-  const [productName, setProductName] = useState<string>('Wireless Earbuds with 40H Playtime');
-  const [targetAudience, setTargetAudience] = useState<string>('College students, working professionals & gamers in India');
+  const [productName, setProductName] = useState<string>('');
+  const [targetAudience, setTargetAudience] = useState<string>('');
   const [adAngle, setAdAngle] = useState<string>('problem_solution');
   const [adPlatform, setAdPlatform] = useState<string>('meta');
-  const [offerText, setOfferText] = useState<string>('Special Launch Offer: Flat 50% Off + 1 Year Warranty + Cash on Delivery');
+  const [offerText, setOfferText] = useState<string>('');
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [generatedAd, setGeneratedAd] = useState<string | null>(null);

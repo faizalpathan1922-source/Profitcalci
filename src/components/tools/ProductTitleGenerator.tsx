@@ -5,9 +5,9 @@ import { AiApiNoticeBanner } from '../AiApiNoticeBanner';
 import { AdSenseBanner } from '../AdSenseBanner';
 
 export const ProductTitleGenerator: React.FC = () => {
-  const [brand, setBrand] = useState<string>('UrbanStitch');
-  const [productType, setProductType] = useState<string>('Oversized Cotton T-Shirt for Men');
-  const [keyAttributes, setKeyAttributes] = useState<string>('Bio-wash 220 GSM, Round Neck, Drop Shoulder, Solid Black, Casual Streetwear');
+  const [brand, setBrand] = useState<string>('');
+  const [productType, setProductType] = useState<string>('');
+  const [keyAttributes, setKeyAttributes] = useState<string>('');
   const [marketplace, setMarketplace] = useState<string>('amazon');
 
   const [isLoading, setIsLoading] = useState<boolean>(false);

@@ -69,16 +69,16 @@ const MARKETPLACE_PRESETS: MarketplacePreset[] = [
 
 export const MarketplaceProfitCalculator: React.FC = () => {
   const [selectedPreset, setSelectedPreset] = useState<'meesho' | 'amazon' | 'flipkart' | 'shopify' | 'custom'>('amazon');
-  const [sellingPriceInput, setSellingPriceInput] = useState<string>('999');
-  const [costPriceInput, setCostPriceInput] = useState<string>('400');
-  const [referralPercentInput, setReferralPercentInput] = useState<string>('12');
-  const [closingFeeInput, setClosingFeeInput] = useState<string>('20');
-  const [shippingFeeInput, setShippingFeeInput] = useState<string>('85');
-  const [packagingFeeInput, setPackagingFeeInput] = useState<string>('20');
-  const [otherExpensesInput, setOtherExpensesInput] = useState<string>('15');
-  const [rtoRateInput, setRtoRateInput] = useState<string>('15');
-  const [rtoLossPerUnitInput, setRtoLossPerUnitInput] = useState<string>('90');
-  const [adSpendInput, setAdSpendInput] = useState<string>('50');
+  const [sellingPriceInput, setSellingPriceInput] = useState<string>('');
+  const [costPriceInput, setCostPriceInput] = useState<string>('');
+  const [referralPercentInput, setReferralPercentInput] = useState<string>('');
+  const [closingFeeInput, setClosingFeeInput] = useState<string>('');
+  const [shippingFeeInput, setShippingFeeInput] = useState<string>('');
+  const [packagingFeeInput, setPackagingFeeInput] = useState<string>('');
+  const [otherExpensesInput, setOtherExpensesInput] = useState<string>('');
+  const [rtoRateInput, setRtoRateInput] = useState<string>('');
+  const [rtoLossPerUnitInput, setRtoLossPerUnitInput] = useState<string>('');
+  const [adSpendInput, setAdSpendInput] = useState<string>('');
   const [copied, setCopied] = useState<boolean>(false);
 
   const handleSelectPreset = (id: 'meesho' | 'amazon' | 'flipkart' | 'shopify' | 'custom') => {

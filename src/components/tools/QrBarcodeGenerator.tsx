@@ -5,15 +5,15 @@ import { AdSenseBanner } from '../AdSenseBanner';
 
 export const QrBarcodeGenerator: React.FC = () => {
   const [qrType, setQrType] = useState<'upi' | 'url' | 'whatsapp' | 'text'>('upi');
-  const [upiId, setUpiId] = useState<string>('merchant@okhdfcbank');
-  const [payeeName, setPayeeName] = useState<string>('Bharat Store');
-  const [amount, setAmount] = useState<string>('499');
-  const [note, setNote] = useState<string>('Order VK102');
+  const [upiId, setUpiId] = useState<string>('');
+  const [payeeName, setPayeeName] = useState<string>('');
+  const [amount, setAmount] = useState<string>('');
+  const [note, setNote] = useState<string>('');
 
-  const [urlInput, setUrlInput] = useState<string>('https://profitcalci.in');
-  const [waNumber, setWaNumber] = useState<string>('919876543210');
-  const [waText, setWaText] = useState<string>('Hi, I want to inquire about your products!');
-  const [rawText, setRawText] = useState<string>('Welcome to Bharat Store! Visit again.');
+  const [urlInput, setUrlInput] = useState<string>('');
+  const [waNumber, setWaNumber] = useState<string>('');
+  const [waText, setWaText] = useState<string>('');
+  const [rawText, setRawText] = useState<string>('');
 
   const [copied, setCopied] = useState<boolean>(false);
   const [isDownloading, setIsDownloading] = useState<boolean>(false);

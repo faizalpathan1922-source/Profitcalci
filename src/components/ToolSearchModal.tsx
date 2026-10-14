@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, X, ArrowRight, Sparkles } from 'lucide-react';
 import { TOOLS_LIST } from '../data/toolsData';
+import { useAdminConfig } from '../context/AdminConfigContext';
 
 interface ToolSearchModalProps {
   isOpen: boolean;
@@ -13,6 +14,7 @@ export const ToolSearchModal: React.FC<ToolSearchModalProps> = ({
   onClose,
   onSelectTool,
 }) => {
+  const { activeTools } = useAdminConfig();
   const [query, setQuery] = useState('');
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export const ToolSearchModal: React.FC<ToolSearchModalProps> = ({
 
   if (!isOpen) return null;
 
-  const filtered = TOOLS_LIST.filter(
+  const filtered = activeTools.filter(
     (t) =>
       t.name.toLowerCase().includes(query.toLowerCase()) ||
       t.description.toLowerCase().includes(query.toLowerCase()) ||

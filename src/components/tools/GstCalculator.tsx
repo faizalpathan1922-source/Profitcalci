@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Calculator, Copy, Check, ArrowRightLeft, Printer, RefreshCw, Info, BookOpen, HelpCircle, Share2 } from 'lucide-react';
 import { formatINR, parseSafeNumber, parsePositiveNumber } from '../../utils/formatters';
+import { useCurrency } from '../../context/CurrencyContext';
 import { AdSenseBanner } from '../AdSenseBanner';
 
 const PRESET_SLABS = [
@@ -13,7 +14,8 @@ const PRESET_SLABS = [
 ];
 
 export const GstCalculator: React.FC = () => {
-  const [amountInput, setAmountInput] = useState<string>('10000');
+  const { currency, currencySymbol } = useCurrency();
+  const [amountInput, setAmountInput] = useState<string>('');
   const [rate, setRate] = useState<number>(18);
   const [isCustomRate, setIsCustomRate] = useState<boolean>(false);
   const [customRateVal, setCustomRateVal] = useState<string>('18');
@@ -175,11 +177,11 @@ Calculated via ProfitCalci: https://profitcalci.in/tool/gst-calculator`;
               <label htmlFor="gst-amount-input" className="text-sm font-semibold text-slate-800">
                 {mode === 'exclusive' ? 'Base Amount (Excluding GST)' : 'Total Amount / MRP (Including GST)'}
               </label>
-              <span className="text-xs text-slate-500">In Indian Rupees (₹)</span>
+              <span className="text-xs text-slate-500">In {currency} ({currencySymbol})</span>
             </div>
             <div className="relative rounded-xl shadow-xs">
               <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                <span className="text-slate-500 font-bold text-lg">₹</span>
+                <span className="text-slate-500 font-bold text-lg">{currencySymbol}</span>
               </div>
               <input
                 id="gst-amount-input"
